@@ -9,13 +9,17 @@ switch ($searchType) {
     default:
         $searchAction = $this->url('site/resource', ['controller' => 'index', 'action' => 'search'], true);
 }
-$searchAction = "/s/slaveryimages/item";
-$searchValue = $this->escapeHtml($this->params()->fromQuery('fulltext_search', ''));
+$searchAction = "/s/yorubadiaspora/item";
+$searchValue = $this->escapeHtml($this->params()->fromQuery('property[0][text]', ''));
 ?>
 
 <form action="<?php echo $this->escapeHtml($searchAction); ?>" id="search-form">
-    <input type="text" name="fulltext_search" value="<?php echo $searchValue; ?>"
+    <input type="text" name="property[0][text]" value="<?php echo $searchValue; ?>"
         placeholder="<?php echo $translate('Search'); ?>"
         aria-label="<?php echo $translate('Search'); ?>">
+    <input type="hidden" name="property[0][joiner]" value="and" />
+    <input type="hidden" name="property[0][property]" value="" />
+    <input type="hidden" name="property[0][type]" value="in" />
+    <input type="hidden" name="resource_template_id[]" value="5" />
     <button type="submit"><?php echo $translate('Search'); ?></button>
 </form>
